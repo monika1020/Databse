@@ -1,0 +1,161 @@
+SQL Exercise 1
+create database Exer1;
+use Exer1;
+--------------------
+ 1)SEMP
+create table SEMP
+(
+EMPNO char(4),
+EMPNAME char(20),
+BASIC float(9,2),
+DEPTNO char(2),
+DEPTHEAD char(4)
+);
+======================================
+2)SDEPT
+create table SDEPT
+(
+DEPTNO char(2),
+DEPTNAME char(15)
+);
+=====================================
+insert into SDEPT values('10','Development');
+insert into SDEPT values('20','Training');
+=============================================
+insert into SEMP values('0001','SUNIL',6000,'10','NULL');
+insert into SEMP values('0002','HIREN',8000,'20','NULL');
+insert into SEMP values('0003','ALI',NULL,'10','0001');
+insert into SEMP values('0004','GEORGE',6000,NULL,'0002');
+=============================================
+create table SUPPLIER
+(
+`S#`char(10),
+Sname char(20),
+Status varchar(10),
+City varchar(20)
+);
+------------------------------
+insert into SUPPLIER values('S1','Monika','A','Jalgaon');
+insert into SUPPLIER values('S2','Rupali','A','Mumbai');
+insert into SUPPLIER values('S3','Shraddha','A','Nagpur');
+
+--------------------------
+update SUPPLIER SET Status='10' where `S#`='S1';
+update SUPPLIER SET Status='20' where `S#`='S2';
+update SUPPLIER SET Status='30' where `S#`='S3';
+--------------------------
+update SUPPLIER set City='London' where `S#`='S2';
+--------------------------------
+insert into SUPPLIER values('S4','Harshda','40','Paris');
+insert into SUPPLIER values('S5','Supriya','50','Athens');
+====================================
+create table PARTS
+(
+`P#` char(10),
+Pname char(20),
+Color varchar(10),
+Weight varchar(10),
+City varchar(20)
+);
+-------------------------------
+insert into PARTS values('P1','Laptop','Black','15','Mumbai');
+insert into PARTS values('P2','Mobile','Gold','5','Kharghar');
+insert into PARTS values('P3','Charger','Black','10','Vashi');
+insert into PARTS values('P4','Computers','Black','10','Athens');
+insert into PARTS values('P5','iphone','Black','10','Athens');
+----------------------------
+update PARTS SET City='London' where `P#`='P3';
+update PARTS SET City='London' where `P#`='P2';
+update PARTS SET City='Paris' where `P#`='P1';
+update PARTS SET Weight='12'where `P#`='P5';
+update PARTS SET Weight='13'where `P#`='P4';
+=================================
+create table PROJECTS
+(
+`J#` char(10),
+Jname char(20),
+City varchar(20)
+
+);
+---------------------
+insert into PROJECTS values('J1','Farmacy System','Pune');
+insert into PROJECTS values('J2','Fraud Detection','Nasik');
+insert into PROJECTS values('J3','AI','US');
+==============================================
+Operation
+5.select * from SUPPLIER;
++------+----------+--------+---------+
+| S#   | Sname    | Status | City    |
++------+----------+--------+---------+
+| S1   | Monika   | 10     | Jalgaon |
+| S2   | Rupali   | 20     | London  |
+| S3   | Shraddha | 30     | Nagpur  |
+| S4   | Harshda  | 40     | Paris   |
+| S5   | Supriya  | 50     | Athens  |
++------+----------+--------+---------+
+6. select `S#`,Sname from SUPPLIER;
++------+----------+
+| S#   | Sname    |
++------+----------+
+| S1   | Monika   |
+| S2   | Rupali   |
+| S3   | Shraddha |
+| S4   | Harshda  |
+| S5   | Supriya  |
++------+----------+
+7.select Pname,Color from Parts where city='London';
++---------+-------+
+| Pname   | Color |
++---------+-------+
+| Mobile  | Gold  |
+| Charger | Black |
++---------+-------+
+8.select Sname from SUPPLIER where city='London';
++--------+
+| Sname  |
++--------+
+| Rupali |
++--------+
+9.select Sname from SUPPLIER where city='Paris'or city='Athens';
++---------+
+| Sname   |
++---------+
+| Harshda |
+| Supriya |
++---------+
+11.select * from parts where weight between 12 and 14;
++------+-----------+-------+--------+--------+
+| P#   | Pname     | Color | Weight | City   |
++------+-----------+-------+--------+--------+
+| P4   | Computers | Black | 13     | Athens |
+| P5   | iphone    | Black | 12     | Athens |
++------+-----------+-------+--------+--------+
+12.select Sname from SUPPLIER where status>=20;
++----------+
+| Sname    |
++----------+
+| Rupali   |
+| Shraddha |
+| Harshda  |
+| Supriya  |
++----------+
+13.Select Sname from supplier where not city='London';
++----------+
+| Sname    |
++----------+
+| Monika   |
+| Shraddha |
+| Harshda  |
+| Supriya  |
++----------+
+14.select city from supplier;
++---------+
+| city    |
++---------+
+| Jalgaon |
+| London  |
+| Nagpur  |
+| Paris   |
+| Athens  |
++---------+
+15.
