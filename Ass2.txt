@@ -1,0 +1,17 @@
+
+Assignment –2
+------------------
+Introducing Relational Databases.
+
+1) Which field of the Customers table is the primary key?
+=> Cnum is the Primary key.
+
+2) What is the 4th column of the Customers table?
+=> Rating is the 4th column of the Customers table.
+
+3) What is another word for row? For column?
+=> For row = Tuple,Entity and Opportunity 
+   For column = Attributes and method.
+
+4) Why isn’t it possible to see the first five rows of a table?
+=> SQL table represents unoerdered set. So there is no such thing as the fist five row    or last row.Hence it is not possible to view first or last 'N' rows of table.
