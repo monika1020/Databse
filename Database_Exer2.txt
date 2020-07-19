@@ -1,0 +1,69 @@
+
+SQL Exercise 2
+------------------------
+1. Display the Supplier table in the descending order of CITY.
+mysql> select * from supplier order by city desc;
++------+----------+--------+---------+
+| S#   | Sname    | Status | City    |
++------+----------+--------+---------+
+| S4   | Harshda  | 40     | Paris   |
+| S3   | Shraddha | 30     | Nagpur  |
+| S2   | Rupali   | 20     | London  |
+| S1   | Monika   | 10     | Jalgaon |
+| S5   | Supriya  | 50     | Athens  |
++------+----------+--------+---------+
+
+
+2. Display the Part Table in the ascending order of CITY and within the city in
+the ascending order of Part names.
+mysql> select * from parts order by city ,pname;
++------+-----------+-------+--------+--------+
+| P#   | Pname     | Color | Weight | City   |
++------+-----------+-------+--------+--------+
+| P4   | Computers | Black | 13     | Athens |
+| P5   | iphone    | Black | 12     | Athens |
+| P3   | Charger   | Black | 10     | London |
+| P2   | Mobile    | Gold  | 5      | London |
+| P1   | Laptop    | Black | 15     | Paris  |
++------+-----------+-------+--------+--------+
+3. Display all the Suppliers with a status between 10 and 20.
+mysql> select * from supplier where status between 10 and 20;
++------+--------+--------+---------+
+| S#   | Sname  | Status | City    |
++------+--------+--------+---------+
+| S1   | Monika | 10     | Jalgaon |
+| S2   | Rupali | 20     | London  |
++------+--------+--------+---------+
+
+4. Display all the Parts and their Weight, which are not in the range of 10 and 15.
+mysql> select pname, weight from parts where weight not in(10,15);
++-----------+--------+
+| pname     | weight |
++-----------+--------+
+| Mobile    | 5      |
+| Computers | 13     |
+| iphone    | 12     |
++-----------+--------+
+5. Display all the Part names starting with the letter ‘C’.
+mysql> select * from parts where pname like 'c%';
++------+-----------+-------+--------+--------+
+| P#   | Pname     | Color | Weight | City   |
++------+-----------+-------+--------+--------+
+| P3   | Charger   | Black | 10     | London |
+| P4   | Computers | Black | 13     | Athens |
++------+-----------+-------+--------+--------+
+6. Display all the Suppliers, belonging to cities starting with the letter ‘S’.
+mysql> select sname,city from supplier where sname like 's%';
++----------+--------+
+| sname    | city   |
++----------+--------+
+| Shraddha | Nagpur |
+| Supriya  | Athens |
++----------+--------+
+7. Display all the Projects, with the third letter in JNAME as ‘r’.
+ mysql> select * from projects where jname like '__r%';
++------+----------------+------+
+| J#   | Jname          | City |
++------+----------------+------+
+| J1   | Farmacy System | Pune |
++------+----------------+------+
