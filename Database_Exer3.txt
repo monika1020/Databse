@@ -1,0 +1,110 @@
+
+SQL Exercise 3
+-------------------
+1. Display all the Supplier names with the initial letter capital.
+mysql> select  concat(substr(upper(sname),1,1),substr(lower(sname),2)) from supplier;
++---------------------------------------------------------+
+| concat(substr(upper(sname),1,1),substr(lower(sname),2)) |
++---------------------------------------------------------+
+| Monika                                                  |
+| Rupali                                                  |
+| Shraddha                                                |
+| Harshda                                                 |
+| Supriya                                                 |
++---------------------------------------------------------+
+
+2. Display all the Supplier names in upper case.
+mysql> select upper (sname) from supplier;
++---------------+
+| upper (sname) |
++---------------+
+| MONIKA        |
+| RUPALI        |
+| SHRADDHA      |
+| HARSHDA       |
+| SUPRIYA       |
++---------------+
+
+3. Display all the Supplier names in lower case.
+mysql> select lower (sname) from supplier;
++---------------+
+| lower (sname) |
++---------------+
+| monika        |
+| rupali        |
+| shraddha      |
+| harshda       |
+| supriya       |
++---------------+
+4. Display all the Supplier names padded to 25 characters, with spaces on the left.
+mysql> select lpad(sname,25,' ') from supplier;
++---------------------------+
+| lpad(sname,25,' ')        |
++---------------------------+
+|                    Monika |
+|                    Rupali |
+|                  Shraddha |
+|                   Harshda |
+|                   Supriya |
++---------------------------+
+5. Display all the Supplier names (with ‘la’ replaced by ‘ro’).
+ HINT: REPLACE.
+mysql> select replace(sname,'la','ro')from supplier;
++--------------------------+
+| replace(sname,'la','ro') |
++--------------------------+
+| Monika                   |
+| Rupali                   |
+| Shraddha                 |
+| Harshda                  |
+| Supriya                  |
++--------------------------+
+
+6. Implement the above command such that ‘l’ is replaced with ‘r’ and ‘a’ is replaced
+with ‘o’.
+=>select replace(replace(sname,'l','r'),'a,'o')from supplier;
+
+7. Display the Supplier names and the lengths of the names.
+mysql> select sname ,length(sname) from supplier;
++----------+---------------+
+| sname    | length(sname) |
++----------+---------------+
+| Monika   |             6 |
+| Rupali   |             6 |
+| Shraddha |             8 |
+| Harshda  |             7 |
+| Supriya  |             7 |
++----------+---------------+
+8. Use the soundex function to search for a supplier by the name of ‘BLOKE’.
+mysql> select * from supplier where soundex(sname)=soundex('BLOKE');
+Empty set (0.00 sec)
+------------
+mysql> select * from supplier where soundex(sname)=soundex('monicaaa');
++------+--------+--------+---------+
+| S#   | Sname  | Status | City    |
++------+--------+--------+---------+
+| S1   | Monika | 10     | Jalgaon |
++------+--------+--------+---------+
+9. Display the Supplier name and the status (as Ten, Twenty, Thirty, etc.).
+=>select sname, case
+ when status=10 then 'Ten'
+ when status=20 then 'Twenty'
+ when status=30 then 'Thirty'
+ when status=40 then 'Fourty'
+ when status=50 then 'Fifty'
+ end status 
+ from supplier;
++----------+--------+
+| sname    | status |
++----------+--------+
+| Monika   | Ten    |
+| Rupali   | Twenty |
+| Shraddha | Thirty |
+| Harshda  | Fourty |
+| Supriya  | Fifty  |
++----------+--------+
+
+
+10. Display the current day (e.g. Thursday). 
+SELECT dayname("2020-07-20");
+select now();
