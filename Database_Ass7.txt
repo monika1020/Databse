@@ -1,0 +1,62 @@
+
+Assignment –7
+---------------------
+Summarizing Data with Aggregate Functions.
+
+1) Write a query that counts all orders for October 3.
+mysql> select count(odate) from orders where odate='1990-10-03';
++--------------+
+| count(odate) |
++--------------+
+|            5 |
++--------------+
+----------------------------------------------------------------
+2) Write a query that counts the number of different non-NULL city values in the
+Customers table.
+mysql> select count(distinct city) from customer where city is not null;
++----------------------+
+| count(distinct city) |
++----------------------+
+|                    4 |
++----------------------+
+--------------------------------------------------------------------------
+3) Write a query that selects each customer’s smallest order.
+mysql> select cnum, min(amt) from orders group by cnum;
++------+----------+
+| cnum | min(amt) |
++------+----------+
+| 2008 |    18.69 |
+| 2001 |   767.19 |
+| 2007 |  1900.10 |
+| 2003 |  5160.45 |
+| 2002 |  1713.23 |
+| 2004 |    75.75 |
+| 2006 |  4723.00 |
++------+----------+
+---------------------------------------------------------------------
+4) Write a query that selects the first customer, in alphabetical order, whose name
+begins with G.
+mysql> select min(cname) from customer where cname like 'G%';
++------------+
+| min(cname) |
++------------+
+| Giovanmi   |
++------------+
+----------------------------------------------------------------
+5) Write a query that selects the highest rating in each city.
+mysql> select max(rating) from customer;
++-------------+
+| max(rating) |
++-------------+
+|         300 |
++-------------+
+----------------------------------------------------------------
+6) Write a query that counts the number of salespeople registering orders for each
+day. (If a salesperson has more than one order on a given day, he or she should be
+counted only once.).
+mysql> select count(distinct odate)from orders;
++-----------------------+
+| count(distinct odate) |
++-----------------------+
+|                     4 |
++-----------------------+
