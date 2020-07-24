@@ -1,0 +1,89 @@
+
+SQL Exercise 5
+----------------------
+1. Display the Supplier name and the Quantity sold.
+mysql> select sname,qty from supplier ,spj where supplier.`s#`=spj.`s#`;
++----------+------+
+| sname    | qty  |
++----------+------+
+| Monika   |  500 |
+| Rupali   |  750 |
+| Shraddha |  900 |
++----------+------+
+----------------------------------------------------------------------
+2. Display the Part name and Quantity sold.
+mysql> select pname,qty from parts ,spj where parts.`p#`=spj.`p#`;
++---------+------+
+| pname   | qty  |
++---------+------+
+| Laptop  |  500 |
+| Mobile  |  750 |
+| Charger |  900 |
++---------+------+
+=-------------------------------------------------------------------------
+3. Display the Project name and Quantity sold.
+mysql> select jname,qty from projects ,spj where projects.`j#`=spj.`j#`;
++-----------------+------+
+| jname           | qty  |
++-----------------+------+
+| Farmacy System  |  500 |
+| Fraud Detection |  750 |
+| AI              |  900 |
++-----------------+------+
+---------------------------------------------------------------------
+4. Display the Supplier name, Part name, Project name and Quantity sold.
+mysql> select sname,pname,jname,qty from supplier,parts,projects,spj where supplier.`S#`=spj.`S#` and parts.`P#`=spj.`P#` and projects.`J#`=spj.`J#`;
++----------+---------+-----------------+------+
+| sname    | pname   | jname           | qty  |
++----------+---------+-----------------+------+
+| Monika   | Laptop  | Farmacy System  |  500 |
+| Rupali   | Mobile  | Fraud Detection |  750 |
+| Shraddha | Charger | AI              |  900 |
++----------+---------+-----------------+------+
+=----------------------------------------------------------------------------
+5. Display the Supplier name, Supplying Parts to a Project in the same City.
+mysql> select sname,pname from supplier,parts where supplier.city=parts.city;
++---------+-----------+
+| sname   | pname     |
++---------+-----------+
+| Harshda | Laptop    |
+| Rupali  | Mobile    |
+| Rupali  | Charger   |
+| Supriya | Computers |
+| Supriya | iphone    |
++---------+-----------+
+-----------------------------------------------------------------------------
+6. Display the Part name that is ‘Red’ is color, and the Quantity sold.
+
+mysql>select pname,qty from parts,spj where spj.`P#`=parts.`P#`and color='Red';
+------------------------------------------------------------------------------
+7. Display all the Quantity sold by Suppliers with the Status = 20.
+
+mysql>select pname,qty from supplier,spj where spj.`S#`=supplier.`S#`and status=20;
+-------------------------------------------------------------------------------------
+8. Display all the Parts and Quantity with a Weight > 14.
+
+mysql>select pname,qty from parts,spj where spj.`P#`=spj.`P#`and weight >14;
+-------------------------------------------------------------------------------
+9. Display all the Project names and City, which has bought more than 500 Parts.
+
+mysql>select projects.Jname , projects.city
+ from projects,spj 
+where projects.`J#` = spj.`J#` and 
+spj.Qty > 500;
+-------------------------------------------------------------------------------
+
+10. Display all the Part names and Quantity sold that have a Weight less than 15.
+
+mysql>select Pname ,Qty
+ from PARTS,spj
+ 
+where parts.`P#` = spj.`P#`and 
+ PARTS.weight < 15;
+-----------------------------------------------------------------------
+11. Display all the Employee names and the name of their Managers. 
+
+mysql> select  b.ename as employee ,a.ename as manager
+	from emp a , emp b 
+	
+where b.mgr = a.empno ; 
