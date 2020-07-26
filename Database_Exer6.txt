@@ -1,0 +1,50 @@
+
+SQL Exercise 6
+-------------------------
+1. Display all the Suppliers with the same Status as the supplier, ‘CLARK’.
+mysql>select * from supplier
+ where status =
+ (select status from supplier where Sname = 'Clark');
+          
+--------------------------------------------------------------------------------
+2. Display all the Employees in the same department as the employee ‘MILLER’.
+mysql>select * from employee where deptno =
+(select deptno from employee where Ename='Miller');
+---------------------------------------------------------------------------------
+3. Display all the Parts which have more Weight than all the Red parts.
+mysql> select * from parts where weight > Any (select weight from parts where color='red');
+----------------------------------------------------------------------------------
+4. Display all the Projects going on in the same city as the project ‘TAPE’.
+mysql> select * from projects where city in (select city from projects where pname='TAPE');
+------------------------------------------------------------------------
+5. Display all the Parts with Weight less than all the Green parts.
+mysql>select * from parts where weight < any(select  weight from parts where  color='Green');
+--------------------------------------------------------------------------------
+6. Display the name of the Supplier who has sold the maximum Quantity (in one
+sale).
+mysql>select Sname from supplier ,Spj 
+where spj.`S#` = supplier .`S#` 
+and 
+spj.Qty >Any (select max(Qty) from (Select max(Qty) , `S#` from spj
+ group by `S#` ) as tempp );
+
+
+------------------------------------------------------------------------------------
+7. Display the name of the Employee with the minimum Salary.
+mysql>select ename,min(sal) from emp group by ename order by min(sal) limit 1;
+---------------------------------------------------------------------------
+8. Display the name of the Supplier who has sold the maximum overall Quantity (sum
+of Sales).
+mysql>select Sname from supplier ,spj 
+where
+ spj.`S#` = supplier .`S#` 
+and spj.Qty =
+ (select max(Qty) from 
+(Select max(Qty) , `S#` from spj 
+ group by `S#` order by max(Qty) desc limit 1  ) as tempp );
+-----------------------------------------------------------------------------
+9. Display the name of the Department with the maximum number of Employees. 
+mysql>select dept.deptname , count(emp.ename) from emp , dept 
+where emp.deptno = dept.deptno
+ group by dept.deptname 
+order by count(emp.ename) desc limit 1 ;
