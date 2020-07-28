@@ -1,0 +1,49 @@
+
+Assignment – 18
+
+Maintaining the Integrity of your Data.
+1) Create a table called Cityorders. This will contain the same onum, amt and snum
+fields as the Orders table, and the same cnum and city fields as the Customers
+table, so that each customer’s order will be entered into this table along with his
+or her city. Onum will be the primary key of Cityorders. All of the fields in
+Cityorders will be constrained to match the Customers and Orders tables. Assume
+the parent keys in these tables already have the proper constraints.
+
+mysql>create table cityorders select Onum,amt,snum,cnum,cty from orders Natural join customer;
+mysql> select * from cityorders;
++------+---------+------+------+----------+
+| Onum | amt     | snum | cnum | city     |
++------+---------+------+------+----------+
+| 3001 |   18.69 | 1007 | 2008 | San Jose |
+| 3003 |  767.19 | 1001 | 2001 | London   |
+| 3002 | 1900.10 | 1004 | 2007 | Rome     |
+| 3006 | 1098.16 | 1007 | 2008 | San Jose |
+| 3009 | 1713.23 | 1003 | 2002 | Rome     |
+| 3008 | 4723.00 | 1001 | 2006 | London   |
+| 3011 | 9891.88 | 1001 | 2006 | London   |
++------+---------+------+------+----------+
+----------------------------------------------------
+mysql> alter table cityorders add primary key(Onum);
+-----------
+mysql> desc cityorders;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| Onum  | int         | NO   | PRI | NULL    |       |
+| amt   | float(7,2)  | YES  |     | NULL    |       |
+| snum  | int         | YES  |     | NULL    |       |
+| cnum  | int         | YES  |     | NULL    |       |
+| city  | varchar(10) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+=============================================================================
+--------------------------------------------------------------------------
+2) Redefine the Orders table as follows:- add a new column called prev, which will
+identify, for each order, the onum of the previous order for that current customer.
+Implement this with a foreign key referring to the Orders table itself. The foreign
+key should refer as well to the cnum of the customer, providing a definite
+enforced link between the current order and the one referenced.
+
+ALTER TABLE cityorders ADD
+FOREIGN key(cnum) REFERENCES customer(cnum);
+ALTER TABLE copy_orders ADD
+FOREIGN key(prev) REFERENCES copy_orders(onum);
