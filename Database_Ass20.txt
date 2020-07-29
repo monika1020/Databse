@@ -1,0 +1,68 @@
+
+Assignment – 20
+===============================
+Changing Values through Views.
+1) Which of these views are updateable (will allow DML operations)?
+#1 Create View Dailyorders
+as Select Distinct cnum, snum, onum, odate from Orders;
+----->Not updatable
+-----------------------------------------------------------------------------
+#2 Create View Custotals
+as Select cname, Sum(amt) Sum_Amt from Orders, Customer
+where Orders.cnum=Customer.cnum
+Group by cname;
+---------->not updatable because it consists of join.
+
+-------------------------------------------------------------------------------
+#3 Create view Thirdorders
+as Select * from Dailyorders where
+odate='1990-10-03';
+------------->Not updatable
+---------------------------------------------------------------------------
+#4 Create view Nullcities
+as Select snum, sname, city
+from Salepeople
+where city is NULL
+OR sname BETWEEN 'A' and 'M';
+----->Yes  it is updatable
+-----------------------------------------------------------------------------
+2) Create a view of the Salespeople table called Commissions. This view will include
+only the snum and comm fields. Through this view, someone could enter or change
+commissions, but only to values between .10 and .20.
+
+mysql> Create view commission as select snum,comm from salepeople where comm between .10 and .20;
+mysql> select * from  commission;
++------+------+
+| snum | comm |
++------+------+
+| 1004 | 0.11 |
+| 1007 | 0.15 |
+| 1003 | 0.10 |
++------+------+
+-----------------------
+mysql> INSERT INTO commission
+    -> VALUES(3000,.25);
+mysql> select * from  commission;
++------+------+
+| snum | comm |
++------+------+
+| 1004 | 0.11 |
+| 1007 | 0.15 |
+| 1003 | 0.10 |
++------+------+
+--------------------------------------------------------------------------------
+3) Some SQL implementations have a built-in constant representing the current date,
+sometimes called “CURDATE” or “SYSDATE”. The word SYSDATE can therefore be used in a SQL statement, and be replaced by the current date when the value is accessed by commands such as Select or Insert. 
+   We will use a view of the Orders table called Entryorders to insert rows into the Orders table. Create the Orders table, so that SYSDATE is automatically inserted for odate if no value is given. Then create the Entryorders view so that no values can be given.
+
+create table orders1
+(
+ onum int(4),
+ Amt float(7,2),
+ Odate date default 'current_timestamp',
+ cnum int(4),
+ snum int(4)
+);
+insert into orders1 (Onum,amt,cnum,snum)values(3001,3789.76,2001,1001);
+crate view entryorders as select * from orders1;
+) 
